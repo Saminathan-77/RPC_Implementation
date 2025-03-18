@@ -34,17 +34,17 @@ class CodeExecutionServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ExecuteCode = channel.unary_stream(
-                '/CodeExecutionService/ExecuteCode',
-                request_serializer=code__execution__pb2.CodeRequest.SerializeToString,
-                response_deserializer=code__execution__pb2.ExecutionResponse.FromString,
+        self.ExecuteCodeBatch = channel.unary_unary(
+                '/CodeExecutionService/ExecuteCodeBatch',
+                request_serializer=code__execution__pb2.CodeBatchRequest.SerializeToString,
+                response_deserializer=code__execution__pb2.CodeBatchResponse.FromString,
                 _registered_method=True)
 
 
 class CodeExecutionServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def ExecuteCode(self, request, context):
+    def ExecuteCodeBatch(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -53,10 +53,10 @@ class CodeExecutionServiceServicer(object):
 
 def add_CodeExecutionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ExecuteCode': grpc.unary_stream_rpc_method_handler(
-                    servicer.ExecuteCode,
-                    request_deserializer=code__execution__pb2.CodeRequest.FromString,
-                    response_serializer=code__execution__pb2.ExecutionResponse.SerializeToString,
+            'ExecuteCodeBatch': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExecuteCodeBatch,
+                    request_deserializer=code__execution__pb2.CodeBatchRequest.FromString,
+                    response_serializer=code__execution__pb2.CodeBatchResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -70,7 +70,7 @@ class CodeExecutionService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def ExecuteCode(request,
+    def ExecuteCodeBatch(request,
             target,
             options=(),
             channel_credentials=None,
@@ -80,12 +80,12 @@ class CodeExecutionService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(
+        return grpc.experimental.unary_unary(
             request,
             target,
-            '/CodeExecutionService/ExecuteCode',
-            code__execution__pb2.CodeRequest.SerializeToString,
-            code__execution__pb2.ExecutionResponse.FromString,
+            '/CodeExecutionService/ExecuteCodeBatch',
+            code__execution__pb2.CodeBatchRequest.SerializeToString,
+            code__execution__pb2.CodeBatchResponse.FromString,
             options,
             channel_credentials,
             insecure,

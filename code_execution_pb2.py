@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14\x63ode_execution.proto\">\n\x0b\x43odeRequest\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x0f\n\x07\x61pi_key\x18\x03 \x01(\t\"#\n\x11\x45xecutionResponse\x12\x0e\n\x06output\x18\x01 \x01(\t2I\n\x14\x43odeExecutionService\x12\x31\n\x0b\x45xecuteCode\x12\x0c.CodeRequest\x1a\x12.ExecutionResponse0\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14\x63ode_execution.proto\">\n\x0b\x43odeRequest\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x0f\n\x07\x61pi_key\x18\x03 \x01(\t\"#\n\x11\x45xecutionResponse\x12\x0e\n\x06output\x18\x01 \x01(\t\"2\n\x10\x43odeBatchRequest\x12\x1e\n\x08requests\x18\x01 \x03(\x0b\x32\x0c.CodeRequest\":\n\x11\x43odeBatchResponse\x12%\n\tresponses\x18\x01 \x03(\x0b\x32\x12.ExecutionResponse2Q\n\x14\x43odeExecutionService\x12\x39\n\x10\x45xecuteCodeBatch\x12\x11.CodeBatchRequest\x1a\x12.CodeBatchResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,6 +35,10 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_CODEREQUEST']._serialized_end=86
   _globals['_EXECUTIONRESPONSE']._serialized_start=88
   _globals['_EXECUTIONRESPONSE']._serialized_end=123
-  _globals['_CODEEXECUTIONSERVICE']._serialized_start=125
-  _globals['_CODEEXECUTIONSERVICE']._serialized_end=198
+  _globals['_CODEBATCHREQUEST']._serialized_start=125
+  _globals['_CODEBATCHREQUEST']._serialized_end=175
+  _globals['_CODEBATCHRESPONSE']._serialized_start=177
+  _globals['_CODEBATCHRESPONSE']._serialized_end=235
+  _globals['_CODEEXECUTIONSERVICE']._serialized_start=237
+  _globals['_CODEEXECUTIONSERVICE']._serialized_end=318
 # @@protoc_insertion_point(module_scope)

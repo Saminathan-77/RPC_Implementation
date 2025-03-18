@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 service CodeExecutionService {
-    rpc ExecuteCode (CodeRequest) returns (stream ExecutionResponse);
+    rpc ExecuteCodeBatch (CodeBatchRequest) returns (CodeBatchResponse);
 }
 
 message CodeRequest {
@@ -12,4 +12,12 @@ message CodeRequest {
 
 message ExecutionResponse {
     string output = 1;
+}
+
+message CodeBatchRequest {
+    repeated CodeRequest requests = 1;
+}
+
+message CodeBatchResponse {
+    repeated ExecutionResponse responses = 1;
 }
