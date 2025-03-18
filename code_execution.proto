@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service CodeExecutionService {
+    rpc ExecuteCode (CodeRequest) returns (stream ExecutionResponse);
+}
+
+message CodeRequest {
+    string language = 1;
+    string code = 2;
+    string api_key = 3; 
+}
+
+message ExecutionResponse {
+    string output = 1;
+}
