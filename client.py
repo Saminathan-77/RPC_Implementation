@@ -9,7 +9,7 @@ def run():
     print("Supported languages: Python, Java, JavaScript")
 
     requests = []
-    api_key = "secure123"  # Authentication Key
+    api_key = "secure123" 
 
     while True:
         language = input("Enter language (or 'done' to execute batch): ").strip().lower()

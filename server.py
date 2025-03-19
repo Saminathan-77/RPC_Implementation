@@ -4,7 +4,7 @@ import code_execution_pb2
 import code_execution_pb2_grpc
 from concurrent import futures
 import os
-
+from concurrent.futures import ThreadPoolExecutor
 # Directory for storing temporary files
 FILES_DIR = "files"
 os.makedirs(FILES_DIR, exist_ok=True)
@@ -14,16 +14,17 @@ VALID_API_KEYS = {"secure123"}  # API Key-based Authentication
 class CodeExecutionServicer(code_execution_pb2_grpc.CodeExecutionServiceServicer):
     def ExecuteCodeBatch(self, request, context):
         responses = []
-        
-        for req in request.requests:
-            if req.api_key not in VALID_API_KEYS:
-                responses.append(code_execution_pb2.ExecutionResponse(output="Unauthorized Access"))
-                continue
+        with ThreadPoolExecutor() as executor:
+            future_to_request = {executor.submit(self.execute_code, req.language, req.code): req for req in request.requests}
 
-            language = req.language.lower()
-            code = req.code
-            output = self.execute_code(language, code)
-            responses.append(code_execution_pb2.ExecutionResponse(output=output))
+            for future in future_to_request:
+                req = future_to_request[future]
+                if req.api_key not in VALID_API_KEYS:
+                    responses.append(code_execution_pb2.ExecutionResponse(output="Unauthorized Access"))
+                    continue
+
+                output = future.result()
+                responses.append(code_execution_pb2.ExecutionResponse(output=output))
         
         return code_execution_pb2.CodeBatchResponse(responses=responses)
 
